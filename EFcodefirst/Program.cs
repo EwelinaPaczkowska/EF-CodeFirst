@@ -1,8 +1,11 @@
 using EFcodefirst.DAL;
 using EFcodefirst.Middlewares;
+using EFcodefirst.Services;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerUI;
+using Microsoft.AspNetCore.OpenApi;
+
 
 namespace EFcodefirst;
 
@@ -25,9 +28,7 @@ public class Program
         });
         
         
-        //builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
-        
-        
+        builder.Services.AddScoped<IPrescriptionService, PrescriptionService>();
 
         builder.Services.AddSwaggerGen(c =>
         {
@@ -49,15 +50,8 @@ public class Program
                 }
             });
         });
-
-        //builder.Services.AddOpenApi();
-
+        
         var app = builder.Build();
-
-        if (app.Environment.IsDevelopment())
-        {
-            //app.MapOpenApi();
-        }
 
         app.UseGlobalExceptionHandling();
         
